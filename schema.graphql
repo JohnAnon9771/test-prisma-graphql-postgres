@@ -1,0 +1,33 @@
+scalar DateTime
+type Query {
+  users: [User!]!
+  task(taskId: ID!): Task
+  tasksByUser(userId: ID!): [Task!]!
+}
+
+type Mutation {
+  createUser(name: String!): User
+  createDraft(
+    title: String!
+    description: String!
+    term: DateTime!
+    importance: String!
+  ): Task
+  publish(taskId: ID!): Task
+}
+
+type User {
+  id: ID!
+  email: String
+  name: String!
+  posts: [Task!]!
+}
+
+type Task {
+  id: ID!
+  title: String!
+  description: String!
+  term: DateTime!
+  importance: String!
+  author: User
+}
